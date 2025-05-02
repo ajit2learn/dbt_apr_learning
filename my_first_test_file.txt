@@ -1,0 +1,156 @@
+C:\Users\ASUS>cd desktop
+
+C:\Users\ASUS\Desktop>mkdir cloudyard_dbt
+
+C:\Users\ASUS\Desktop>cd cloudyard_dbt
+
+
+
+C:\Users\ASUS\Desktop\cloudyard_dbt>pip install virtualenv
+
+/*
+--output of above command. It may differ depending on the above command was previously executed or not
+Requirement already satisfied: virtualenv in c:\users\asus\appdata\local\programs\python\python311\lib\site-packages (20.23.0)
+Requirement already satisfied: distlib<1,>=0.3.6 in c:\users\asus\appdata\local\programs\python\python311\lib\site-packages (from virtualenv) (0.3.6)
+Requirement already satisfied: filelock<4,>=3.11 in c:\users\asus\appdata\local\programs\python\python311\lib\site-packages (from virtualenv) (3.12.1)
+Requirement already satisfied: platformdirs<4,>=3.2 in c:\users\asus\appdata\local\programs\python\python311\lib\site-packages (from virtualenv) (3.5.1)
+
+[notice] A new release of pip is available: 24.0 -> 25.0.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+
+*/
+
+C:\Users\ASUS\Desktop\cloudyard_dbt>virtualenv venv
+
+C:\Users\ASUS\Desktop\cloudyard_dbt>dir
+
+
+C:\Users\ASUS\Desktop\cloudyard_dbt>mkdir %userprofile%\.dbt    -- this step is required to create the configuration file (.dbt)
+
+C:\Users\ASUS\Desktop\cloudyard_dbt>venv\Scripts\activate
+
+
+--- every time you open cmd and come to work for dbt again resume the course---cd to cloudyard_dbt - 
+--and run venv\Scripts\activate to activate the virtual environment
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt>python --version
+Python 3.11.3
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt>pip install dbt-snowflake==1.7.1
+
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt>dbt --version
+/*  --output
+Core:
+  - installed: 1.7.19
+  - latest:    1.9.4  - Update available!
+
+  Your version of dbt-core is out of date!
+  You can find instructions for upgrading here:
+  https://docs.getdbt.com/docs/installation
+
+Plugins:
+  - snowflake: 1.7.1 - Update available!
+
+  At least one plugin is out of date or incompatible with dbt-core.
+  You can find instructions for upgrading here:
+  https://docs.getdbt.com/docs/installation
+*/
+
+--before executing the following step, please create a repository in github and then proceed with git clone from cmd prompt. My repository name is cloudy_dbt
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt>git clone https://github.com/adas997/cloudy_dbt.git
+Cloning into 'cloudy_dbt'...
+warning: You appear to have cloned an empty repository.
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt>cd cloudy_dbt
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt\cloudy_dbt>dbt init cldydbt   
+18:39:59  Running with dbt=1.7.19
+18:39:59
+Your new dbt project "cldydbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+18:39:59  Setting up your profile.
+Which database would you like to use?
+[1] snowflake
+
+(Don't see the one you want? https://docs.getdbt.com/docs/available-adapters)
+
+Enter a number: 1
+account (https://<this_value>.snowflakecomputing.com): whybhny-fy00211
+user (dev username): dbtdev
+[1] password
+[2] keypair
+[3] sso
+Desired authentication type option (enter a number): 1
+password (dev password):
+role (dev role): CTRANSFORM
+warehouse (warehouse name): CLOUDY_WH
+database (default database that dbt will build objects in): DBT_DEV
+schema (default schema that dbt will build objects in): BRONZE_LAYER
+threads (1 or more) [1]: 5
+18:45:06  Profile cldydbt written to C:\Users\ASUS\.dbt\profiles.yml using targets profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt\cloudy_dbt>cd cldydbt  --i.e change directory to the project initialized above
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt\cloudy_dbt\cldydbt>dbt debug
+18:46:34  Running with dbt=1.7.19
+18:46:34  dbt version: 1.7.19
+18:46:34  python version: 3.11.3
+18:46:34  python path: C:\Users\ASUS\Desktop\cloudyard_dbt\venv\Scripts\python.exe
+18:46:34  os info: Windows-10-10.0.26100-SP0
+18:46:35  Using profiles dir at C:\Users\ASUS\.dbt
+18:46:35  Using profiles.yml file at C:\Users\ASUS\.dbt\profiles.yml
+18:46:35  Using dbt_project.yml file at C:\Users\ASUS\Desktop\cloudyard_dbt\cloudy_dbt\cldydbt\dbt_project.yml
+18:46:35  adapter type: snowflake
+18:46:35  adapter version: 1.7.1
+18:46:35  Configuration:
+18:46:35    profiles.yml file [OK found and valid]
+18:46:35    dbt_project.yml file [OK found and valid]
+18:46:35  Required dependencies:
+18:46:35   - git [OK found]
+
+18:46:35  Connection:
+18:46:35    account: whybhny-fy00211
+18:46:35    user: dbtdev
+18:46:35    database: DBT_DEV
+18:46:35    warehouse: CLOUDY_WH
+18:46:35    role: CTRANSFORM
+18:46:35    schema: BRONZE_LAYER
+18:46:35    authenticator: None
+18:46:35    private_key_path: None
+18:46:35    token: None
+18:46:35    oauth_client_id: None
+18:46:35    query_tag: None
+18:46:35    client_session_keep_alive: False
+18:46:35    host: None
+18:46:35    port: None
+18:46:35    proxy_host: None
+18:46:35    proxy_port: None
+18:46:35    protocol: None
+18:46:35    connect_retries: 1
+18:46:35    connect_timeout: None
+18:46:35    retry_on_database_errors: False
+18:46:35    retry_all: False
+18:46:35    insecure_mode: False
+18:46:35    reuse_connections: None
+18:46:35  Registered adapter: snowflake=1.7.1
+18:46:36    Connection test: [OK connection ok]
+
+18:46:36  All checks passed!
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt\cloudy_dbt\cldydbt>code .  /* this will open VSS from command prompt */
+
+(venv) C:\Users\ASUS\Desktop\cloudyard_dbt\cloudy_dbt\cldydbt>
